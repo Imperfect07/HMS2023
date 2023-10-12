@@ -1,9 +1,17 @@
  package hotel.management.system;
 
- import  javax.swing.*;
- import java.awt.*;
+
+import java.awt.*;
+import javax.swing.*;
+import javax.swing.border.*;
+import java.awt.event.*;
+import java.sql.*;
+import java.util.*;
+
  
-public class Dashboard extends JFrame {
+
+ 
+public class Dashboard extends JFrame implements ActionListener {
     
     Dashboard(){
         setBounds(0,0,1550,1000);
@@ -19,28 +27,51 @@ public class Dashboard extends JFrame {
         mb.setBounds(0,0,1550,30);
         image.add(mb);
         
+        
         JMenu hotel=new JMenu("HOTEL MANAGEMENT");
         hotel.setForeground(Color.RED);
         mb.add(hotel);
         
         JMenuItem recep=new JMenuItem("RECEPTION");
+        recep.addActionListener(this);
         hotel.add(recep);
         
          
         
-        JMenu admin=new JMenu("ADMIN");
+        JMenu admin=new JMenu("ADMIN^");
         admin.setForeground(Color.BLUE);
         mb.add(admin);
         
+         JMenuItem emp=new JMenuItem("ADD EMPLOYEE");
+         emp.addActionListener(this);
+         admin.add(emp);
+         
         JMenuItem room=new JMenuItem("ADD ROOMS");
+            room.addActionListener(this);
         admin.add(room);
         
         JMenuItem driv=new JMenuItem("ADD DRIVERS");
+        driv.addActionListener(this);
         admin.add(driv);
         
-        JMenuItem emp=new JMenuItem("ADD EMPLOYEE");
-        admin.add(emp);
+       
+      
+         
         setVisible(true);
+    }
+    public void actionPerformed(ActionEvent ae)
+    {
+        if(ae.getActionCommand().equals("ADD EMPLOYEE")){
+            new AddEmployee();
+            
+        }else if(ae.getActionCommand().equals("ADD ROOMS")){
+            new AddRooms();
+            
+        }else if(ae.getActionCommand().equals("ADD DRIVERS")){
+            new AddDriver();
+        }else if(ae.getActionCommand().equals("RECEPTION")){
+            new Reception();
+        }
     }
     
     public static void main(String[] args){
